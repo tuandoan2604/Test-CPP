@@ -3,27 +3,27 @@
 
 using namespace std;
 
-bool checkConnectionsDirect(vector<vector<bool>> matric, int add1, int add2) 
+bool checkConnectionsDirect(vector<vector<bool>> matrix, int add1, int add2) 
 {
-    return matric[add1][add2];
+    return matrix[add1][add2];
 }
 
-bool checkConnections(vector<vector<bool>> matric, int add1, int add2)
+bool checkConnections(vector<vector<bool>> matrix, int add1, int add2)
 {
-    if (checkConnectionsDirect(matric, add1, add2))
+    if (checkConnectionsDirect(matrix, add1, add2))
     {
-        return checkConnectionsDirect(matric, add1, add2);
+        return checkConnectionsDirect(matrix, add1, add2);
     }
     else
     {
-        for(int i = 0; i < matric.size(); i++)
+        for(int i = 0; i < matrix.size(); i++)
         {
-            if(matric[add1][i])
+            if(matrix[add1][i])
             {
-                vector<vector<bool>> matric1 = matric;
-                matric1[add1][i] = false;
-                matric1[i][add1] = false;
-                if(checkConnections(matric1, i, add2))
+                vector<vector<bool>> matrix1 = matrix;
+                matrix1[add1][i] = false;
+                matrix1[i][add1] = false;
+                if(checkConnections(matrix1, i, add2))
                 {
                     return true;
                 }
@@ -35,21 +35,23 @@ bool checkConnections(vector<vector<bool>> matric, int add1, int add2)
 
 /*giai phap la chỉ cần 1 sân bay đi đến được tất cả các sân bay trực tiếp hoặc gián tiếp
 thì các sân bay sẽ tự động kết nối với nhau*/
-void getMinimumConnections(vector<vector<bool>> matric, int &min)
+int getMinimumConnections(vector<vector<bool>> matrix)
 {
-    for (int i = 1; i < matric.size(); i++)
+    int min = 0;
+    for (int i = 1; i < matrix.size(); i++)
     {
-        if (checkConnections(matric, 0, i))
+        if (checkConnections(matrix, 0, i))
         {
             continue;
         }
         else
         {
-            matric[0][i] = true;
-            matric[i][0] = true;
+            matrix[0][i] = true;
+            matrix[i][0] = true;
             min++;
         }
     }
+    return min;
 }
 
 int main()
@@ -64,16 +66,15 @@ int main()
         {false, false, false, false, false, false}
     };
 
-    int min = 0;
     vector<vector<bool>> air2 = air;
 
-    getMinimumConnections(air2, min);
-    if(min == 0)
+    getMinimumConnections(air2);
+    if(getMinimumConnections(air2) == 0)
     {
         cout << "All airports are pre-connected";
     }
     else
     {
-        cout << "need " << min << "connecttions";
+        cout << "need " << getMinimumConnections(air2) << " connecttions";
     }
 }
