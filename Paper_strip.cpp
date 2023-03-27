@@ -35,7 +35,7 @@ int minPieces(const vector<int>& original, const vector<int>& desired)
             }
         }
     }
-    return cut;
+    return cut+1;
 }
 
 // #ifndef RunTests
@@ -44,8 +44,11 @@ int main()
     // vector<int> original = { 1, 4, 3, 2, 10, 5, 6, 13};
     // vector<int> desired = { 1, 2, 10, 5, 4, 3, 13, 6 };
 
-    vector<int> original = { 1, 4, 3, 5, 2, 10};
-    vector<int> desired = { 1, 2, 10, 5, 4, 3};
+    // vector<int> original = { 1, 4, 3, 5, 2, 10};
+    // vector<int> desired = { 1, 2, 10, 5, 4, 3};
+
+    vector<int> original = { 1, 4, 3, 2};
+    vector<int> desired = { 1, 2, 4, 3};
 
     int num = minPieces(original, desired);
     cout << num << endl;
