@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+using namespace std;
+
+int minPieces(vector<int>& original, vector<int>& desired)
+{
+	int solancat = 0; //khai bao so lan cat 
+	stack <int> v; //khai bao 1 vector v bat ki 
+
+	int x = 0;
+
+	while (original.size() != 0)
+	{
+		for (int i = 0; i < original.size(); i++)
+		{
+			while (original[i] == desired[x]) //neu 2 gia tri o desire va original bang nhau thi tiep tuc so sanh 2 gia tri tiep theo cua no 
+			{
+				v.push(original[i]);
+				x++;
+				i++;
+
+if (original.size() == 0)
+break;
+				
+
+				if (original[i] != desired[x])
+				{
+					solancat++;
+					break;
+				}
+			}
+
+		}
+	}
+	return solancat;
+}
+
+#ifndef RunTests
+int main()
+{
+	vector<int> original = { 1, 4, 3, 2 };
+	vector<int> desired = { 1, 2, 4, 3 };
+	cout << minPieces(original, desired) << endl;
+}
+#endif
