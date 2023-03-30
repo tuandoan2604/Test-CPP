@@ -1,5 +1,5 @@
 #include <iostream>
-#include <queue>
+#include <stack>
 #include <vector>
 int getMinimumConnections(std::vector<std::vector<bool>>& matrix) {
     // số sân bay n
@@ -13,14 +13,17 @@ int getMinimumConnections(std::vector<std::vector<bool>>& matrix) {
     for (int i = 0; i < n; i++) {
         //Nếu sân bay chưa được duyệt
         if (!visited[i]) {
-            //Khởi tại 1 queue s có thể chứa các sân bay
-            std::queue<int> q;
-            q.push(i);
-            visited[i] = true;
-            while (!q.empty()) {
+            //Khởi tại 1 stack s có thể chứa các sân bay
+            std::stack<int> s;
+            s.push(i);
+            while (!s.empty()) {
+                // curr là sân bay hiện tại
                 int curr = s.top();
+                //Khi đã xét rồi thì đồng thời lấy ra khỏi stack luôn
                 s.pop();
                 visited[curr] = true;
+
+                // Mõi sân bay so sánh với từng sân bay một
                 for (int j = 0; j < n; j++) {
                     if (matrix[curr][j] && !visited[j]) {
                         s.push(j);
