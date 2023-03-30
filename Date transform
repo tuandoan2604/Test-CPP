@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#pragma once
+using namespace std;
+
+vector<string> transformDateFormat(const vector<string>& dates)
+{
+    vector<string> v;
+    for (int i = 0; i < dates.size(); i++)
+    {
+        if (dates[i].find('/') == 4)
+        {
+            string s1 = dates[i].substr(0, 4);
+            string s2 = dates[i].substr(5, 2);
+            string s3 = dates[i].substr(8, 2);
+            v[i] = s1 + s2 + s3;
+        }
+        else if (dates[i].find('/') == 2)
+        {
+            string s1 = dates[i].substr(0, 2);
+            string s2 = dates[i].substr(3, 2);
+            string s3 = dates[i].substr(6, 4);
+            v[i] = s3 + s2 + s1;
+        }
+        else
+        {
+            string s1 = dates[i].substr(0, 2);
+            string s2 = dates[i].substr(3, 2);
+            string s3 = dates[i].substr(6, 4);
+            v[i] = s3 + s1 + s2;
+        }
+    }
+    return v;
+}
+
+int main()
+{
+    vector<string> dates = { "2010/02/20", "19/12/2016", "11-18-2012" };
+    vector<string> reformattedDates = transformDateFormat(dates);
+
+    for (int i = 0; i < reformattedDates.size(); i++)
+    {
+        cout << reformattedDates[i] << endl;
+    }
+}
