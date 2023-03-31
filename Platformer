@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+static int x;
+class Platformer
+{
+public: 
+    int n;
+    int position;
+    vector <int> v;
+
+public:
+    Platformer(int n, int position)
+    {
+        this->n = n;
+        this->position = position;
+        for (int i = 1; i <= n; i++)
+        {
+            v[i] = i;
+        }
+        x = position;
+    }
+    void jumpLeft()
+    {
+        x = x - 2;
+        position = v[x];
+        v.erase(v.begin() + (x+2));
+    }
+    void jumpRight()
+    {
+        x = x + 2;
+        position = v[x];
+        v.erase(v.begin() + (x-2));
+        x--;
+    }
+    
+    int getposition()
+    {
+        return position;
+    }
+};
+
+int main()
+{
+    Platformer platformer(6, 3);
+    cout << platformer.getposition() << endl; // should print 3
+    platformer.jumpLeft();
+    cout << platformer.getposition() << endl; // should print 1
+    platformer.jumpRight();
+    cout << platformer.getposition() << endl; // should print 4
+}
