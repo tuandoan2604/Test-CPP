@@ -4,20 +4,20 @@
 #include<iostream> 
 #include<vector> 
 using namespace std; 
-  
+
+class ngoc{
+    public:
+        int a = 10;
+
+        void fun(int a){
+            this->a = a;
+        }
+};
 int main() 
 { 
-    while (1)
-    {
-        while (1)
-        {
-            cout<<"ok";
-            break;
-        }
-        cout<<"break done!";
-        
-    }
-    
+    ngoc tran;
+    tran.fun(11);
+    cout<<tran.a;
 
     return 0; 
 } 
