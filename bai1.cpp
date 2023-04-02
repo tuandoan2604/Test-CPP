@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -9,14 +10,19 @@ int getMinimumConnections(vector<vector<bool>> matrix) {
     int count = 0;
     for (int i = 0; i < n; i++) {
         if (!visited[i]) {
-            count++;
-            visited[i] = true;
-            for (int j = 0; j < n; j++) {
-                if (matrix[i][j] && !visited[j]) {
-                    visited[j] = true;
+            std::stack<int> s;
+            s.push(i);
+            while(!s.empty()){
+                int curr = s.top();
+                s.pop();
+                visited[curr] = true;
+                for(int j = 0; j<n;j++){
+                    if(matrix[curr][j]&&!visited[j]){
+                        s.push(j);
+                    }
                 }
             }
-        }
+            count++;
     }
     return count - 1;
 }
