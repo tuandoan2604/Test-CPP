@@ -27,13 +27,8 @@ using namespace std;
 #include <string>
 
 int main() {
-    std::string str = "Hello World 123!";
-    size_t found = str.find_first_not_of("0123456789");
-    std::cout <<found<<std::endl;
-    if (found != std::string::npos) {
-        std::cout << "The string contains non-alphanumeric character at position " << found << std::endl;
-    } else {
-        std::cout << "The string contains only alphanumeric characters." << std::endl;
-    }
+    vector <int> a (6 , 10);
+    cout << a[4];
+    cout << a.size();
     return 0;
 }
