@@ -1,34 +1,44 @@
+// #include <iostream>
+// #include <unordered_map>
+// #include <memory>
+// #include <functional>
 
-// C++ code to demonstrate copy of vector 
-// by iterative method. 
-#include<iostream> 
-#include<vector> 
-using namespace std; 
+// class FunctionCache
+// {
 
+// public:
+//     FunctionCache(std::function<int(int, int)> function): function(function) {}
 
-// int main() 
-// { 
-//     vector <string > V;
-//     V = {"1tran" , "duc", "11ngoc","11"};
-
-//     for (const auto&v :V ){
-//         cout<< string("12").find_first_not_of("0123456789") <<endl ;
-//     }
-
-//     // string a = "tran";
-//     // a =  a + "duc";
-//     // cout<<a;
+//     std::function<int(int, int)> function;
+// };
 
 
-//     return 0; 
-// } 
-
+#include <stdexcept>
 #include <iostream>
-#include <string>
+#include <vector>
+#include <regex>
 
-int main() {
-    vector <int> a (6 , 10);
-    cout << a[4];
-    cout << a.size();
-    return 0;
+using namespace std;
+
+std::vector<std::string> transformDateFormat(const std::vector<std::string>& dates)
+{
+    vector<string> reformattedDates;
+    regex reg(R"([-[\]{}()*+?.,/\^$|#\s])");
+    for (const auto& date : dates)
+    {   
+        reformattedDates.push_back(regex_replace(date, reg, ""));
+    }
+    return reformattedDates;
 }
+
+#ifndef RunTests
+int main()
+{
+    std::vector<std::string> dates = {"2010/02/20", "19/12/2016", "11-18-2012", "20130720"};
+    std::vector<std::string> reformattedDates = transformDateFormat(dates);
+    for (auto const& reformattedDate : reformattedDates)
+    {
+        std::cout << reformattedDate << std::endl;
+    }
+}
+#endif
