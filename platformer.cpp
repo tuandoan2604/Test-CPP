@@ -33,3 +33,6 @@ class Platformer{
         }
 };
 
+int main(){
+    return 0;
+}
