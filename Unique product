@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+string firstUniqueProduct(const vector<string>& products)
+{
+	int i = 0;
+	while(i < products.size())
+	{
+		for (int j = 0; j < products.size(); j++)
+		{
+			if (i != j && products[i] == products[j])
+			{
+				i++;
+				continue;
+			}
+		}
+		return products[i];
+	}
+}
+#ifndef RunTests
+int main()
+{
+    vector<string> products = { "Apple", "Computer", "Apple", "Bag" };
+    cout << firstUniqueProduct(products);
+}
+#endif
