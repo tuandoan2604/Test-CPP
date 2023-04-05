@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+#include <list>
+using namespace std;
+
+class WindowManager
+{
+private:
+    list <string> danhsach;
+public:
+    void open(const string windowName)
+    {
+        danhsach.push_back(windowName);
+    }
+
+    void close(const string windowName)
+    {
+        danhsach.remove(windowName);
+    }
+
+    string getTopWindow()
+    {
+        string Topwindow = danhsach.back();
+        return Topwindow;
+    }
+};
+
+#ifndef RunTests
+int main()
+{
+    WindowManager wm;
+    wm.open("Calculator");
+    wm.open("Browser");
+    wm.open("Player");
+    wm.close("Browser");
+    cout << wm.getTopWindow();
+}
+#endif
