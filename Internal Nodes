@@ -1,0 +1,38 @@
+#include <vector>
+#include <set>
+#include <iostream>
+using namespace std;
+
+int countInternalNodes(const vector<int>& tree)
+{
+    set <int> internalnodes;
+    for (int i = 0; i < tree.size(); i++)
+    {
+        if (tree[i] != -1)
+        {
+            internalnodes.insert(tree[i]);
+        }
+        else
+        {
+            internalnodes.insert(i);
+        }
+    }
+    for (auto x : internalnodes)
+    {
+        cout << x << " ";
+    }
+    return 0;
+}
+
+#ifndef RunTests
+int main()
+{
+    vector<int> tree;
+    tree.push_back(1);
+    tree.push_back(3);
+    tree.push_back(1);
+    tree.push_back(-1);
+    tree.push_back(3);
+    countInternalNodes(tree);
+}
+#endif
