@@ -1,0 +1,69 @@
+#include <vector>
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+using namespace std;
+
+int nthLowestSelling(const std::vector<int>& sales, int n)
+{
+    vector <int> vt;
+    unordered_map <int, int> Count;
+    for (int i = 0; i < sales.size(); i++)
+    {
+        auto search = Count.find(sales[i]);
+        if (search != Count.end())
+        {
+            int value = search->first;
+            Count[value]++;
+        }
+        else
+        {
+            Count[sales[i]] = 1;
+        }
+    }
+    for (auto x : Count)
+    {
+        vt.push_back(x.second);
+    }
+    for (int i = 0; i < vt.size()-1; i++)
+    {
+        for (int j = i+1; j < vt.size(); j++)
+        {
+            if (vt[i] > vt[j])
+            {
+                swap(vt[i], vt[j]);
+            }
+        }
+    }
+    int position = vt[n - 1];
+    for (auto y: Count)
+    {
+        if (y.second == position)
+        {
+            int index = y.first;
+            return index;
+        }
+    }
+}
+
+int main()
+{
+    std::vector<int> input;
+    input.push_back(5);
+    input.push_back(4);
+    input.push_back(6);
+    input.push_back(2);
+    input.push_back(1);
+    input.push_back(5);
+    input.push_back(4);
+    input.push_back(6);
+    input.push_back(2);
+    input.push_back(5);
+    input.push_back(4);
+    input.push_back(6);
+    input.push_back(5);
+    input.push_back(4);
+    input.push_back(5);
+    int x = nthLowestSelling(input, 3);
+    cout << x;
+}
