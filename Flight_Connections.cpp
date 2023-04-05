@@ -1,54 +1,89 @@
 #include <iostream>
-#include <stack>
 #include <vector>
+#include <algorithm>
+#include <stack>
+using namespace std;
+
+
 int getMinimumConnections(std::vector<std::vector<bool>>& matrix) {
-    // số sân bay n
     int n = matrix.size();
-    //Khởi tạo 1 vector tương ứng với các sân bay; sân bay nào đã duyệt đến thì là True, chưa duyệt đến là false
-    std::vector<bool> visited(n, false);
-
-    int numConnections = 0; // //Số kết nối
-
-    // DFS(Depth First Search ) 
+    std::vector<int> parent(n);
     for (int i = 0; i < n; i++) {
-        //Nếu sân bay chưa được duyệt
-        if (!visited[i]) {
-            //Khởi tại 1 stack s có thể chứa các sân bay
-            std::stack<int> s;
-            s.push(i);
-            while (!s.empty()) {
-                // curr là sân bay hiện tại
-                int curr = s.top();
-                //Khi đã xét rồi thì đồng thời lấy ra khỏi stack luôn
-                s.pop();
-                visited[curr] = true;
-
-                // Mõi sân bay so sánh với từng sân bay một
-                for (int j = 0; j < n; j++) {
-                    if (matrix[curr][j] && !visited[j]) {
-                        s.push(j);
-                    }
-                }
-            }
-            numConnections++; 
-        }
-
+        parent[i] = i;
     }
 
-    return numConnections - 1; // // vì hết trương trình vẫn cộng lên;
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (matrix[i][j]) {
+                int parent_i = parent[i];
+                int parent_j = parent[j];
+                if (parent_i != parent_j) {
+                    parent[parent_j] = parent_i;
+                }
+            }
+        }
+    }
+
+    int numConnections = 0;
+    for (int i = 0; i < n; i++) {
+        if (parent[i] == i) {
+            numConnections++;
+        }
+    }
+
+    return numConnections - 1;
 }
 
 #ifndef RunTests
 int main()
 {
-std::vector<std::vector<bool>> matrix {
-    {false, true, false, false, true},
-    {true, false, false, false, false},
-    {false, false, false, true, false},
-    {false, false, true, false, false},
-    {true, false, false, false, false}
-};
+    vector<vector<bool>> matrix {
+        {false, true, false, false, true},
+        {true, false, false, false, false},
+        {false, false, false, true, false},
+        {false, false, true, false, false},
+        {true, false, false, false, false}
+    };
 
-    std::cout << getMinimumConnections(matrix) << std::endl; // should print 1
+    vector<vector<bool>> all_connected_matrix {
+        {false, true, true, true, true},
+        {true, false, true, true, true},
+        {true, true, false, true, true},
+        {true, true, true, false, true},
+        {true, true, true, true, false}
+    };
+
+    vector<vector<bool>> large_matrix {
+        {false, false, true, false, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {true, false, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {true, true, true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {true, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, true},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, true, true, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, true, false, false, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, true, false, false},
+        {false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false}
+    };
+
+    cout << getMinimumConnections(matrix) << endl;                  // should print 1
+    cout << getMinimumConnections(all_connected_matrix) << endl;    // should print 0
+    cout << getMinimumConnections(large_matrix) << endl;            // should print 7
 }
 #endif
