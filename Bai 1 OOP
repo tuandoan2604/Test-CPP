@@ -1,0 +1,168 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class Canbo
+{
+private:
+	string name;
+	int age;
+	string sex;
+	string address;
+public:
+	Canbo()
+	{}
+	Canbo(string name, int age, string sex, string address) 
+	{
+		this->name = name;
+		this->age = age;
+		this->sex = sex;
+		this->address = address;
+	}
+	string getname()
+	{
+		return name;
+	}
+	int getage()
+	{
+		return age;
+	}
+	string getsex()
+	{
+		return sex;
+	}
+	string getadd()
+	{
+		return address;
+	}
+	void setname()
+	{
+		this->name = name;
+	}
+	void setage()
+	{
+		this->age = age;
+	}
+	void setsex()
+	{
+		this->sex = sex;
+	}
+	void setadd()
+	{
+		this->address = address;
+	}
+	void display()
+	{
+		cout << "Name: " << getname() << endl;
+		cout << "Age: " << getage() << endl;
+		cout << "Sex: " << getsex() << endl;
+		cout << "Address: " << getadd() << endl;
+	}
+};
+class Congnhan : public Canbo
+{
+private:
+	int grade;
+public:
+	Congnhan(string name, int age, string sex, string address, int grade) : Canbo(name, age, sex, address)
+	{
+		this->grade = grade;
+	}
+	void setgrade()
+	{
+		this->grade = grade;
+	}
+	int getgrade()
+	{
+		return grade;
+	}
+};
+
+class Kysu : public Canbo
+{
+private:
+	string Major;
+public:
+	Kysu(string name, int age, string sex, string address, string Major) : Canbo(name, age, sex, address)
+	{
+		this->Major = Major;
+	}
+	void setmajor()
+	{
+		this->Major = Major;
+	}
+	string getmajor()
+	{
+		return Major;
+	}
+};
+
+class Nhanvien : public Canbo
+{
+private:
+	string Congviec;
+public:
+	Nhanvien(string name, int age, string sex, string address, string Congviec) : Canbo(name, age, sex, address)
+	{
+		this->Congviec = Congviec;
+	}
+	void setjob()
+	{
+		this->Congviec = Congviec;
+	}
+	string getjob()
+	{
+		return Congviec;
+	}
+};
+
+class Manager
+{
+private:
+	vector <Canbo> dscanbo;
+
+public:
+	Manager()
+	{
+		this->dscanbo =  dscanbo;
+	}
+
+	void addcb(Canbo canbo)
+	{
+		dscanbo.push_back(canbo);
+	}
+	void searchbyname(string name) 
+	{
+		for (int i = 0; i < dscanbo.size(); i++)
+		{
+			if (dscanbo[i].getname() == name)
+			{
+				dscanbo[i].display();
+				break;
+			}
+		}
+	}
+	void showinfordscb() 
+	{
+		for (int i = 0; i < dscanbo.size(); i++)
+		{
+			dscanbo[i].display();
+		}
+	}
+};
+
+int main()
+{
+	Canbo A("Dung", 24, "male", "Hn");
+	Canbo B("X", 12, "Male", "HY");
+	Canbo C("Y", 20, "Female", "HCM");
+	Manager DS;
+	DS.addcb(A);
+	DS.addcb(B);
+	DS.addcb(C);
+	DS.searchbyname("Dung");
+	DS.showinfordscb();
+	//A.display();
+	return 0;
+}
