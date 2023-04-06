@@ -47,5 +47,6 @@ int main()
     int x = nthLowestSelling(input, 2);
     std::cout << x;
 }
+
 #endif
 
