@@ -19,7 +19,6 @@ class FunctionCache
         int first;
         int second;
         
-        // Custom hash function for Parameters
         struct Hash
         {
             size_t operator()(const Parameters& params) const
@@ -30,7 +29,6 @@ class FunctionCache
             }
         };
 
-        // Custom equality function for Parameters
         struct EqualTo
         {
             bool operator()(const Parameters& params1, const Parameters& params2) const
@@ -47,11 +45,7 @@ public:
     int calculate(int first, int second)
     {
         Parameters args(first, second);
-        // Hàm find tìm kiếm 1 phần tử trong map có key là args
-        // Nếu tìm thấy  trả về một iterator chỉ đến phần tử đó
-        // Không tìm thấy  trả về iterator trỏ đến phần tử tiếp theo sau phần tử cuối cùng của map
         auto it = calculations.find(args);
-        // Nếu  tìm thấy
         if (it != calculations.end())
             return it->second;
 
@@ -77,13 +71,10 @@ int main()
 {
     FunctionCache cache(modulo);
 
-    // Function modulo should be called.
     std::cout << cache.calculate(5, 2) << std::endl;
 
-    // Function modulo should be called.
     std::cout << cache.calculate(7, 4) << std::endl;
 
-    // Function modulo shouldn't be called because we have already made a call with arguments (5, 2)!
     std::cout << cache.calculate(5, 2) << std::endl;
 }
 #endif
