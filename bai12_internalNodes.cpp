@@ -1,23 +1,24 @@
 #include <vector>
 #include <set>
 #include <iostream>
+#include <set>
 using namespace std;
 
 int countInternalNodes(const vector<int> &tree)
 {
-    int cout=0;
-    int a[tree.size()];
+    
+    set <int> internalNode;
     for (int i = 0; i < tree.size(); i++)
     {
-        if (tree[i] != -1)
+        if (tree[i] == -1)
         {
-            a[tree[i]] = 1;
+             internalNode.insert(i);
+        }
+        else {
+            internalNode.insert(tree[i]);
         }
     }
-    for (int i=0; i<tree.size();i++){
-        if(a[i]==1){cout++;}
-    }
-    return cout;
+    return internalNode.size();
 }
 
 int main()
