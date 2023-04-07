@@ -1,46 +1,48 @@
 #include <iostream>
 #include <vector>
-#include <string>
-#pragma once
+#include <regex>
 using namespace std;
 
 vector<string> transformDateFormat(const vector<string>& dates)
 {
-    vector<string> v;
-    for (int i = 0; i < dates.size(); i++)
+    vector<string> result;
+    regex pattern("(\\d{4})/(\\d{2})/(\\d{2})|(\\d{2})-(\\d{2})-(\\d{4})|(\\d{8})|(\\d{2})/(\\d{2})/(\\d{4})");
+    smatch smatch;
+    for (const auto& date : dates)
     {
-        if (dates[i].find('/') == 4)
+        if (regex_match(date, smatch, pattern))
         {
-            string s1 = dates[i].substr(0, 4);
-            string s2 = dates[i].substr(5, 2);
-            string s3 = dates[i].substr(8, 2);
-            v[i] = s1 + s2 + s3;
-        }
-        else if (dates[i].find('/') == 2)
-        {
-            string s1 = dates[i].substr(0, 2);
-            string s2 = dates[i].substr(3, 2);
-            string s3 = dates[i].substr(6, 4);
-            v[i] = s3 + s2 + s1;
-        }
-        else
-        {
-            string s1 = dates[i].substr(0, 2);
-            string s2 = dates[i].substr(3, 2);
-            string s3 = dates[i].substr(6, 4);
-            v[i] = s3 + s1 + s2;
+            if (smatch[1].matched)
+            {
+                result.push_back(smatch[1].str() + smatch[2].str() + smatch[3].str());
+            }
+            else if (smatch[4].matched)
+            {
+                result.push_back(smatch[6].str() + smatch[4].str() + smatch[5].str());
+            }
+            else if (smatch[7].matched) 
+            {
+                result.push_back(smatch[7].str());
+            }
+            else if (smatch[8].matched)
+            {
+                result.push_back(smatch[10].str() + smatch[9].str() + smatch[8].str());
+            }
         }
     }
-    return v;
+    return result;
 }
+
+#ifndef RunTests
 
 int main()
 {
-    vector<string> dates = { "2010/02/20", "19/12/2016", "11-18-2012" };
+    vector<string> dates = { "2010/02/20", "19/12/2016", "11-18-2012", "20130720" };
     vector<string> reformattedDates = transformDateFormat(dates);
-
-    for (int i = 0; i < reformattedDates.size(); i++)
+    for (auto const& reformattedDate : reformattedDates)
     {
-        cout << reformattedDates[i] << endl;
+        cout << reformattedDate << endl;
     }
 }
+
+#endif
