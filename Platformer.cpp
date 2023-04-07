@@ -12,7 +12,7 @@ class Platformer
 
 public:
     
-    Platformer(int n, int position) 
+    Platformer(int n, int position)
     {
         // throw std::logic_error("Waiting to be implemented");
         for(int i = 0; i < n; i++)
@@ -38,7 +38,7 @@ public:
         point += 2;
         vec.erase(vec.begin()+pos);
         point -= 1;
-        pos += 2;
+        pos += 1;
         // cout<< "Number pointed "<< *point<< endl;
     }
 
@@ -47,15 +47,30 @@ public:
         // throw std::logic_error("Waiting to be implemented");
         return *point;
     }
+
 };
 // #ifndef RunTests
 int main()
 {
-    Platformer platformer(6, 3);
+    Platformer platformer(9, 3);
     std::cout << platformer.position() << std::endl; // should print 3
+    // platformer.print();
     platformer.jumpLeft();
     std::cout << platformer.position() << std::endl; // should print 1
+    // platformer.print();
     platformer.jumpRight();
     std::cout << platformer.position() << std::endl; // should print 4
+    // platformer.print();
+    platformer.jumpRight();
+    std::cout << platformer.position() << std::endl; // should print 6
+    // platformer.print();
+    platformer.jumpRight();
+    std::cout << platformer.position() << std::endl; // should print 8
+    // platformer.print();
+    platformer.jumpLeft();
+    std::cout << platformer.position() << std::endl; // should print 5
+    // platformer.print();
+
+    return 0;
 }
 // #endif
