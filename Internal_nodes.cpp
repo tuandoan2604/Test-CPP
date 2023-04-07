@@ -1,5 +1,5 @@
 #include <vector>
-#include <algorithm>
+#include <set>
 #include <iostream>
 
 using namespace std;
@@ -7,18 +7,13 @@ using namespace std;
 int countInternalNodes (const vector<int>& tree)
 {
     // throw std::logic_error("Waiting to be implemented");
-    vector <int> parent;
+    set <int> parent;
 
-    parent.push_back(tree[0]);
     for(int i=1; i<tree.size(); i++)
     { 
-        vector<int>::iterator it = find(parent.begin(), parent.end(), tree[i]);
-        if (it == parent.end() && tree[i] > 0 && parent.at(parent.size()-1) != tree[i])
-        {
-            parent.push_back(tree[i]);
-        }
+        parent.insert(tree[i]);
     }
-    return parent.size();
+    return (parent.size()-1);
 }
 #ifndef RunTests
 int main()
