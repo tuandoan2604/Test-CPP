@@ -17,11 +17,11 @@ int countInternalNodes(const vector<int>& tree)
             internalnodes.insert(i);
         }
     }
-    for (auto x : internalnodes)
+    /*for (auto x : internalnodes)
     {
         cout << x << " ";
-    }
-    return 0;
+    }*/
+    return internalnodes.size();
 }
 
 #ifndef RunTests
@@ -33,6 +33,7 @@ int main()
     tree.push_back(1);
     tree.push_back(-1);
     tree.push_back(3);
-    countInternalNodes(tree);
+    //countInternalNodes(tree);
+    cout << countInternalNodes(tree) << endl;
 }
 #endif
