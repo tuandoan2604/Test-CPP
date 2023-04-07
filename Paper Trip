@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int search(vector<int>& original, int number)
+{
+	for (int j = 0; j < original.size(); j++)
+	{
+		if (original[j] == number)
+		{
+			return j;
+		}
+	}
+}
+int minPieces(vector<int>& original, vector<int>& desired)
+{
+	int solancat = 0; //khai bao so lan cat 
+	for (int i = 0; i < desired.size(); i++)
+	{
+		int x = search(original, desired[i]);
+			while (true)
+			{
+				if ((i + 1) == desired.size())
+				{
+					break;
+				}
+				if (desired[(i+1)] == original[(x+1)])
+				{	
+						i++;
+						x++;				
+				}
+				else
+				{
+					break;
+					solancat++;
+				}
+			}		
+	}
+	return solancat;
+}
+
+int main()
+{
+	vector<int> original = { 7, 1, 2, 3 };
+	vector<int> desired = { 1, 2, 3, 7 };
+	cout << minPieces(original, desired) << endl;
+	return 0;
+}
