@@ -2,28 +2,33 @@
 #include <stdexcept>
 #include <iostream>
 #include <unordered_map>
-#include <algorithm>
+
+using namespace std;
 
 int nthLowestSelling(const std::vector<int>& sales, int n) 
 {
-    std::unordered_map<int, int> salesCount;
-    for (int bookId : sales) {
-        salesCount[bookId]++;
+    unordered_map<int, int> Sales_Count;
+
+    for(int i=0; i<sales.size(); i++)
+    {
+
+        auto idx = Sales_Count.find(sales[i]);
+        //Nếu tìm thấy thì tăng value lên 1
+        if(idx != Sales_Count.end())
+        {
+            int value = idx->first;
+            Sales_Count[value]++;
+        }
+        //Không tìm thấy thì khởi tạo lần đầu bằng 1
+        else{
+            Sales_Count[sales[i]] = 1;
+        }
     }
-    
-    std::vector<int> counts;
-    for (const auto& kv : salesCount) {
-        counts.push_back(kv.second);
-    }
-    
-    std::sort(counts.begin(), counts.end());
-    
-    if (n > counts.size()) {
-        throw std::invalid_argument("Invalid value of n");
-    }
-    
-    return counts[n - 1];
+
+    auto pos = Sales_Count.find(n);
+    return pos->first;
 }
+
 
 #ifndef RunTests
 int main()
