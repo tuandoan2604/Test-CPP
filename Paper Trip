@@ -31,8 +31,8 @@ int minPieces(vector<int>& original, vector<int>& desired)
 				}
 				else
 				{
-					break;
 					solancat++;
+					break;
 				}
 			}		
 	}
