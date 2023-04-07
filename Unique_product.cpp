@@ -8,25 +8,30 @@ using namespace std;
 std::string firstUniqueProduct(const std::vector<std::string>& products)
 {
     // throw std::logic_error("Waiting to be implemented");
-    for(int i=0; i<products.size();)
+    for(int i=0; i<products.size(); i++)
     {
-        for (int j=i+1; j<products.size(); j++)
+        int check = 0;
+        // cout<< "Pointing to "<< products[i]<< endl;
+        for (int j=0; j<products.size(); j++)
         {
-            if(products[i] == products[j])
+            if(products[i] == products[j] && i != j)
             {
-                continue;
+                // cout<< "Duplicate name "<< products[i]<< endl;
+                check = 1;
+                break;
             }
         }
-        i++;
-        return products[i];
+        if(!check)
+            return products[i];
     }
-
+    string s = "";
+    return s;
 }
 
 #ifndef RunTests
 int main()
 {
-    std::vector<std::string> products = { "Apple", "Computer", "Apple", "Bag" };
+    std::vector<std::string> products = { "Apple", "Computer", "Apple", "Computer", "Bag", "Bag" };
     std::cout << firstUniqueProduct(products);
 }
 #endif
