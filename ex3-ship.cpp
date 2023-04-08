@@ -1,66 +1,37 @@
-#include <string>
-
 #include <iostream>
-
-#include <stdexcept>
-
 #include <vector>
+#include <functional>
 
-using namespace std;
-
-int searchNumber(const vector<int>& ori, int number)
+class Ship
 {
-    for (int i = 0; i < ori.size(); i++)
+public:
+    Ship(int containerCount, std::function<int(int)> fillContainer)
     {
-        if (ori[i] == number)
+        this->containers.reserve(containerCount); 
+
+        for (int i = 0; i < containerCount; i++)
         {
-            return i;
+            this->containers.push_back(fillContainer(i)); 
         }
     }
-    return 0;
-}
 
-int minPieces(const vector<int>& original, const vector<int>& desired)
-
-{
-    int count = 0;
-    for (int i = 0; i < desired.size(); i++) 
+    int peekContainer(int containerIndex)
     {
-        count++;
-        int j = searchNumber(original, desired[i]);
-        while(1)
-        {
-            if( i+1 == desired.size())
-            {
-                return count;
-            }
-            if(original[j+1] == desired[i+1])
-            {
-                i++;
-                j++;
-            }
-            else
-            {
-                break;
-            }
-        }
+        return this->containers.at(containerIndex); // sử dụng vector thay vì unordermap
     }
-    return count;
-    throw logic_error("Waiting to be implemented");
-
-}
+private:
+    std::vector<int> containers;
+};
 
 #ifndef RunTests
 
 int main()
-
 {
-
-    vector<int> original = { 1, 4, 3, 2 };
-
-    vector<int> desired = { 1, 2, 4, 3 };
-
-    cout << minPieces(original, desired) << std::endl;
+    Ship ship(10, [](int containerIndex) { return containerIndex; });
+    for (int i = 0; i < 10; i++) 
+    {
+        std::cout << "Container: " << i << ", cargo: " << ship.peekContainer(i) << "\n";
+    }
 
 }
 
