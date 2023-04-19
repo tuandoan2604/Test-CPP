@@ -21,7 +21,10 @@ Yêu cầu 3: Nhập n hộ dân. (n nhập từ bàn phím), hiển thị thôn
 
 using namespace std;
 
-
+#define INSERT 1
+#define DELETE 2
+#define SHOW 3
+#define EXIT 4
 
 int main(){
 
@@ -42,16 +45,16 @@ int main(){
         system("cls");
         switch (option)
         {
-        case 1:
+        case INSERT:
             town.Inset_Family();
             break;
-        case 2:
+        case DELETE:
             town.Delete_Family();
             break;
-        case 3:
+        case SHOW:
             town.Show_Information();
             break;
-        case 4:
+        case EXIT:
             exit_loop = false;
             break;
         default:

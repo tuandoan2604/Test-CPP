@@ -28,6 +28,12 @@ using namespace std;
 #include "Newspaper.cpp"
 #include "Manage_Document.cpp"
 
+#define INSERT 1
+#define DELETE 2
+#define SHOW 3
+#define SEARCH 4
+#define EXIT 5
+
 int main(){
 
     int option;
@@ -48,19 +54,19 @@ int main(){
         system("cls");
         switch (option)
         {
-        case 1:
+        case INSERT:
             MD.Insert_document();
             break;
-        case 2:
+        case DELETE:
             MD.Delete_document();
             break;
-        case 3:
+        case SHOW:
             MD.Show_informationDocument();
             break;
-        case 4:
+        case SEARCH:
             MD.Search_by_type();
             break;
-        case 5:
+        case EXIT:
             exit_loop = false;
             break;
         default:

@@ -27,7 +27,10 @@ using namespace std;
 #include "Candidate_Block_C.cpp"
 #include "Admissions.cpp"
 
-
+#define INSERT 1
+#define SHOW 2
+#define SEARCH 3
+#define EXIT 4
 
 
 int main(){
@@ -49,16 +52,16 @@ int main(){
         system("cls");
         switch (option)
         {
-        case 1:
+        case INSERT:
             Ams.Insert_candidate();
             break;
-        case 2:
+        case SHOW:
             Ams.Show_Information();
             break;
-        case 3:
+        case SEARCH:
             Ams.Search_by_ID();
             break;
-        case 4:
+        case EXIT:
             exit_loop = false;
             break;
         default:

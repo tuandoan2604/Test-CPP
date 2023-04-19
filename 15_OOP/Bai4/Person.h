@@ -49,8 +49,8 @@ class Person{
 
         int GetID() const;
         void Show_information();
-        virtual void Input();
-        virtual ~Person(){
+        void Input();
+         ~Person(){
             cout <<"=>Destructor Person!!!\n";
         }
 };

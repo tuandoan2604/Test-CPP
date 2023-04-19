@@ -28,6 +28,10 @@ Thoát khỏi chương trình.*/
 // #include "staff_Management.h"
 #include "Staff_Management.cpp"
 
+#define INSERT 1
+#define SHOW 2
+#define FIND 3
+#define EXIT 4
 using namespace std;
 
 
@@ -50,16 +54,16 @@ int main(){
 
         switch (option)
         {
-        case 1:
+        case INSERT:
             sm.Insert_Cadres();
             break;
-        case 2:
+        case SHOW:
             sm.Show_List();
             break;
-        case 3:
+        case FIND:
             sm.Find_Name();
             break;
-        case 4:
+        case EXIT:
             exit_loop = false;
             break;
         default:
