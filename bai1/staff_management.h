@@ -4,7 +4,7 @@
 #include "engineer.h"
 #include <vector>
 
-class StaffMangement{
+class StaffManagement{
 
     private:
         vector <Officer *> listOfficer;
@@ -13,7 +13,7 @@ class StaffMangement{
         void findName();
         void showList();
 
-        ~StaffMangement(){
+        ~StaffManagement(){
             cout<<"Destructor staff_management\n";
             for (Officer* officer : listOfficer){
                 delete officer;
