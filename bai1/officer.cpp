@@ -24,7 +24,7 @@ bool Officer::get_gender() const{
     return gender;
 }
 
-// tại sao phải tạo virtual distructor
+
 void Officer:: show_information(){
     cout << get_name() << "     " << get_age() << "    " << get_gender()?string("nam\n"):string("nu\n"); 
 }
