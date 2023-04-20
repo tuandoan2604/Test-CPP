@@ -43,8 +43,8 @@ string Student6::getHomeTown()
 
 void Student6::display()
 {
-    cout<<"Ho va Ten :"<<fullName<<endl;
-    cout<<"Tuoi :"<<age<<endl;
-    cout<<"Que quan :"<< homeTown<<endl;
+    cout<<"Ho va Ten :"<<getFullName()<<endl;
+    cout<<"Tuoi :"<<getAge()<<endl;
+    cout<<"Que quan :"<< getHomeTown()<<endl;
     cout<<"============="<<endl;
 }
