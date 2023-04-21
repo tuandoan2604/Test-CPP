@@ -42,7 +42,7 @@ class Document{
 
         int getIdDocument() const;
         string getPublisher() const;
-        void setPublisher();
+        void setPublisher(string nxb);
         int getNumPublisher() const;
         void setNumPublisher();
         virtual int getType(){return 0;}
@@ -53,6 +53,20 @@ class Document{
         }
 };
 
+void Document::showInformation(){
+    cout<<"Id: "<<getIdDocument()<<endl;
+    cout<<"Publisher: "<<getPublisher()<<endl;
+    cout<<"Number: "<<getNumPublisher()<<endl;
+}
+
 int Document::getIdDocument() const{
-    
+    return this->id;
+}
+
+string Document::getPublisher() const{
+    return this->nxb;
+}
+
+void Document::setPublisher(string nxb){
+    this->nxb = nxb;
 }
