@@ -1,0 +1,14 @@
+Ngọc:
+	Bài 1: 
+		Example case: Correct answer
+		All airports are pre-connected: Correct answer
+		Some airports are pre-connected: Correct answer
+		Performance test on large number of airports and flight connections: Fail - Time limit exceeded
+	Bài 2
+		Example case: Correct answer
+		10 elements: Correct answer
+		Performance test with a large paper strip: Fail - Time limit exceeded
+
+Example case: Correct answer
+10 tiles: Correct answer
+Performance test with a large number of tiles: Time limit exceeded @Đức Ngọc Platformer
