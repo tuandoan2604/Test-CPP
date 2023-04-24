@@ -1,0 +1,23 @@
+#include "Vehicle.h"
+#include "Vehicle.cpp"
+#include "Motobike.h"
+#include "Motobike.cpp"
+#include "Car.h"
+#include "Car.cpp"
+#include "Truct.h"
+#include "Truct.cpp"
+#define ADD 1
+#define DELETE 2
+#define FIND 3
+#define EXIT 4
+int main (){
+
+    int choose;
+    while (true)
+    
+    {
+        /* code */
+    }
+    
+    return 0;
+}
