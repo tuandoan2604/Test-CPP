@@ -5,7 +5,7 @@
 
 class Client
 {
-private:
+protected:
     /* data */
     string name;
     int address;
@@ -13,6 +13,12 @@ private:
 public:
     Client(/* args */);
     ~Client();
+
+    int getID(){return ID;}
+
+    void setName(string name){this->name = name;}
+    void setAddress(int address){this->address = address;}
+    void setID(int ID){this->ID = ID;}
 };
 
 Client::Client(/* args */)
